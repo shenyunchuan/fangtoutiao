@@ -1,5 +1,6 @@
 package com.example.fangtoutiao;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class NewsInfo {
@@ -70,7 +71,7 @@ public class NewsInfo {
             this.pageSize = pageSize;
         }
 
-        public static class DataDTO {
+        public static class DataDTO implements Serializable {
             private String uniquekey;
             private String title;
             private String date;

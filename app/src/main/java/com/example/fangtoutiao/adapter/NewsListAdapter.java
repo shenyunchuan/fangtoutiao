@@ -51,6 +51,15 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyHold
         //加载图片
         Glide.with(mContext).load(dataDTO.getThumbnail_pic_s()).error(R.mipmap.file_error).into(holder.thumbnail_pic_s);
 
+        //点击事件
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=mOnItemClickListener){
+                    mOnItemClickListener.onItemClick(dataDTO,position);
+                }
+            }
+        });
     }
 
     @Override
@@ -70,5 +79,16 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyHold
             date = itemView.findViewById(R.id.date);
             title = itemView.findViewById(R.id.title);
         }
+    }
+
+    private onItemClickListener mOnItemClickListener;
+
+
+    public void setmOnItemClickListener(onItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(NewsInfo.ResultDTO.DataDTO dataDTO,int position);
     }
 }

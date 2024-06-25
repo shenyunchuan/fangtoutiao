@@ -1,5 +1,6 @@
 package com.example.fangtoutiao;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -95,6 +96,18 @@ public class TabNewsFragment extends Fragment {
         mNewsListAdapter = new NewsListAdapter(getActivity());
         //设置adapter
         recyclerView.setAdapter(mNewsListAdapter);
+        //recyclerView列表点击事件
+        mNewsListAdapter.setmOnItemClickListener(new NewsListAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(NewsInfo.ResultDTO.DataDTO dataDTO, int position) {
+                //跳转到详情页
+                Intent intent = new Intent(getActivity(),NewsDetailsActivity.class);
+                //传递对象的时候该类要实现Serializable
+                intent.putExtra("dataDTO",dataDTO);
+                startActivity(intent);
+            }
+        });
+
         //获取数据
         getHttpData();
 
