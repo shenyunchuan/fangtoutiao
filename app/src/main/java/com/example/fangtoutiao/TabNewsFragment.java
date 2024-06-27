@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.fangtoutiao.adapter.NewsListAdapter;
+import com.example.fangtoutiao.dialog.CommonDialog;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -100,11 +101,19 @@ public class TabNewsFragment extends Fragment {
         mNewsListAdapter.setmOnItemClickListener(new NewsListAdapter.onItemClickListener() {
             @Override
             public void onItemClick(NewsInfo.ResultDTO.DataDTO dataDTO, int position) {
-                //跳转到详情页
-                Intent intent = new Intent(getActivity(),NewsDetailsActivity.class);
-                //传递对象的时候该类要实现Serializable
-                intent.putExtra("dataDTO",dataDTO);
-                startActivity(intent);
+//                //跳转到详情页
+//                Intent intent = new Intent(getActivity(),NewsDetailsActivity.class);
+//                //传递对象的时候该类要实现Serializable
+//                intent.putExtra("dataDTO",dataDTO);
+//                startActivity(intent);
+                CommonDialog dialog = new CommonDialog(getContext());
+                dialog.setOnCommonClickListener(new CommonDialog.OnCommonClickListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(getContext(), "dialog Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -144,4 +153,6 @@ public class TabNewsFragment extends Fragment {
             }
         });
     }
+
+
 }
